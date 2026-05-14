@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZKV.LOL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,13 +31,19 @@
                         <div class="name-details">
                             <h1 class="full-name">Mateusz Rybicki</h1>
                             <span class="nickname">"zkv106"</span>
+                            <a href="https://github.com/zzkvv106/zkv.github.io" target="_blank" class="src-link">
+                                <i class="fas fa-code"></i> Website Src
+                            </a>
                             <div class="social-links">
                                 <a href="https://open.spotify.com/user/31rtfs25yj4tek2pgppcqu7aaxaq" target="_blank"
                                     class="social-icon spotify">
                                     <i class="fab fa-spotify"></i>
                                 </a>
-                                <a href="https://github.com/zzkvv106" target="_blank" class="social-icon github">
+                                <a href="https://github.com/zzkvv106" target="_blank" class="social-icon github" title="GitHub Profile">
                                     <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://github.com/zzkvv106/zkv.github.io" target="_blank" class="social-icon github-src" title="Website Source">
+                                    <i class="fas fa-code"></i>
                                 </a>
                             </div>
                         </div>
@@ -42,21 +51,7 @@
                 </div>
             </div>
 
-            <!-- About Window -->
-            <div class="window" id="about-win">
-                <div class="title-bar">
-                    <div class="close-box"></div>
-                    <div class="title-bar-text">README.txt</div>
-                </div>
-                <div class="window-body">
-                    <p class="about-text">
-                        Jestem Front-end developerem, tworzę estetyczne i funkcjonalne interfejsy użytkownika.
-                        Programuję od roku 2020 i od tego samego roku używam systemu Linux. Uwielbiam muzykę rockową z
-                        lat
-                        60-90, a także gry RPG. W wolnym czasie tworzę grafiki oraz fotografuję dronem.
-                    </p>
-                </div>
-            </div>
+
 
             <!-- Skills Window -->
             <div class="window" id="skills-win">
@@ -104,20 +99,42 @@
                             <span
                                 style="display: block; font-size: 10px; margin-top: 5px; font-weight: bold;">Mines</span>
                         </div>
-                        <div class="game-launcher" id="launch-2048" style="cursor: pointer;">
-                            <i class="fas fa-th" style="font-size: 24px; color: var(--mac-white);"></i>
-                            <span
-                                style="display: block; font-size: 10px; margin-top: 5px; font-weight: bold;">2048</span>
-                        </div>
+
                         <div class="game-launcher" id="launch-reaction" style="cursor: pointer;">
-                            <i class="fas fa-bolt" style="font-size: 24px; color: var(--mac-accent);"></i>
-                            <span
-                                style="display: block; font-size: 10px; margin-top: 5px; font-weight: bold;">Reaction</span>
+                            <i class="fas fa-bolt"></i><span>Reaction</span>
                         </div>
                         <div class="game-launcher" id="launch-sequence" style="cursor: pointer;">
-                            <i class="fas fa-braille" style="font-size: 24px; color: var(--mac-white);"></i>
-                            <span
-                                style="display: block; font-size: 10px; margin-top: 5px; font-weight: bold;">Sequence</span>
+                            <i class="fas fa-braille"></i><span>Sequence</span>
+                        </div>
+                        <div class="game-launcher" id="launch-aim" style="cursor: pointer;">
+                            <i class="fas fa-crosshairs"></i><span>Aim</span>
+                        </div>
+                        <div class="game-launcher" id="launch-verbal" style="cursor: pointer;">
+                            <i class="fas fa-font"></i><span>Verbal</span>
+                        </div>
+                        <div class="game-launcher" id="launch-visual" style="cursor: pointer;">
+                            <i class="fas fa-th-large"></i><span>Visual</span>
+                        </div>
+                        <div class="game-launcher" id="launch-number" style="cursor: pointer;">
+                            <i class="fas fa-hashtag"></i><span>Number</span>
+                        </div>
+                        <div class="game-launcher" id="launch-chimp" style="cursor: pointer;">
+                            <i class="fas fa-brain"></i><span>Chimp</span>
+                        </div>
+                        <div class="game-launcher" id="launch-math" style="cursor: pointer;">
+                            <i class="fas fa-calculator"></i><span>Math</span>
+                        </div>
+                        <div class="game-launcher" id="launch-stroop" style="color: #ff00ff; cursor: pointer;">
+                            <i class="fas fa-palette"></i><span>Stroop</span>
+                        </div>
+                        <div class="game-launcher" id="launch-grid" style="cursor: pointer;">
+                            <i class="fas fa-sort-numeric-up"></i><span>1-20</span>
+                        </div>
+                        <div class="game-launcher" id="launch-color" style="cursor: pointer;">
+                            <i class="fas fa-eye"></i><span>Color</span>
+                        </div>
+                        <div class="game-launcher" id="launch-flip" style="cursor: pointer;">
+                            <i class="fas fa-clone"></i><span>Flip</span>
                         </div>
                     </div>
                 </div>
@@ -182,94 +199,217 @@
         </div>
     </div>
 
-    <!-- Blackjack Overlay -->
-    <div id="blackjack-overlay" class="game-overlay" style="display: none;">
-        <div class="game-table">
+
+    <!-- GAME OVERLAYS (All Standardized) -->
+    <div id="blackjack-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>BLACKJACK</h2>
             <div class="dealer-area">
-                <div class="area-label">DEALER</div>
+                <div class="area-label">DEALER <span id="bj-dealer-score">0</span></div>
                 <div class="cards" id="bj-dealer-cards"></div>
-                <div class="score" id="bj-dealer-score">0</div>
             </div>
-
-            <div class="message-area" id="bj-msg">PRESS DEAL TO START</div>
-
+            <div id="bj-msg">PRESS DEAL TO START</div>
             <div class="player-area">
-                <div class="area-label">PLAYER</div>
+                <div class="area-label">PLAYER <span id="bj-player-score">0</span></div>
                 <div class="cards" id="bj-player-cards"></div>
-                <div class="score" id="bj-player-score">0</div>
             </div>
-
-            <div class="controls">
+            <div class="stats-row">
                 <button id="bj-deal" class="game-btn">DEAL</button>
                 <button id="bj-hit" class="game-btn" disabled>HIT</button>
                 <button id="bj-stand" class="game-btn" disabled>STAND</button>
-                <button class="game-btn red close-game-btn">EXIT</button>
             </div>
         </div>
     </div>
 
-    <!-- Speed Typer Overlay -->
-    <div id="typer-overlay" class="game-overlay" style="display: none;">
-        <div class="game-table centered">
+    <div id="typer-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
             <h2>SPEED TYPER</h2>
-            <div id="typer-stats" class="stats-row">WPM: <span id="typer-wpm">0</span> | TIME: <span
-                    id="typer-time">30</span>s</div>
-            <div id="typer-display">PRESS START TO BEGIN</div>
-            <input type="text" id="typer-input" autocomplete="off" disabled>
-            <div class="controls">
-                <button id="typer-start" class="game-btn">START</button>
-                <button class="game-btn red close-game-btn">EXIT</button>
+            <div class="benchmark-stats">
+                <span>WPM: <b id="typer-wpm">0</b></span>
+                <span>TIME: <b id="typer-time">30</b>s</span>
             </div>
+            <div id="typer-display">PRESS START...</div>
+            <input type="text" id="typer-input" class="game-input-large" placeholder="TYPE!" autocomplete="off" disabled>
+            <button id="typer-start" class="game-btn">START</button>
         </div>
     </div>
 
-    <!-- Minesweeper Overlay -->
-    <div id="mines-overlay" class="game-overlay" style="display: none;">
-        <div class="game-table centered">
+    <div id="mines-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
             <h2>MINESWEEPER</h2>
-            <div class="stats-row">MINES: <span id="mines-count">10</span> | TIME: <span id="mines-timer">0</span></div>
-            <div id="mines-grid"></div>
-            <div class="controls">
-                <button id="mines-reset" class="game-btn">RESET</button>
-                <button class="game-btn red close-game-btn">EXIT</button>
+            <div class="benchmark-stats">
+                <span>MINES: <b id="mines-count">10</b></span>
+                <span>TIME: <b id="mines-timer">0</b>s</span>
+            </div>
+            <div id="mines-grid" style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: 15px auto;"></div>
+            <button id="mines-reset" class="game-btn">RESET</button>
+        </div>
+    </div>
+
+    <div id="reaction-overlay" class="game-overlay">
+        <div class="window-body benchmark-body" style="height: 100%; max-width: 100%;">
+            <button class="close-game-btn floating-exit"><i class="fas fa-times"></i> EXIT</button>
+            <div id="reaction-area" class="fullscreen-click-area">
+                <div class="reaction-msg">WAIT FOR GREEN...</div>
+                <div class="reaction-score hidden">0 ms</div>
             </div>
         </div>
     </div>
 
-    <!-- 2048 Overlay -->
-    <div id="2048-overlay" class="game-overlay" style="display: none;">
-        <div class="game-table centered">
-            <h2>2048</h2>
-            <div class="stats-row">SCORE: <span id="2048-score">0</span></div>
-            <div id="2048-grid"></div>
-            <div class="controls">
-                <button id="2048-reset" class="game-btn">RESET</button>
-                <button class="game-btn red close-game-btn">EXIT</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reaction Overlay -->
-    <div id="reaction-overlay" class="game-overlay" style="display: none;">
-        <div id="reaction-area" class="fullscreen-click-area">
-            <div class="reaction-msg">CLICK TO TEST REACTION</div>
-            <div class="reaction-score hidden">0 ms</div>
-        </div>
-        <button class="game-btn red close-game-btn floating-exit">EXIT</button>
-    </div>
-
-    <!-- Sequence Overlay -->
-    <div id="sequence-overlay" class="game-overlay" style="display: none;">
-        <div class="game-table centered">
+    <div id="sequence-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
             <h2>SEQUENCE MEMORY</h2>
-            <div class="stats-row">LEVEL: <span id="seq-level">1</span></div>
-            <div id="seq-grid"></div>
-            <div class="controls">
-                <button id="seq-start" class="game-btn">START</button>
-                <button class="game-btn red close-game-btn">EXIT</button>
+            <div class="benchmark-stats">
+                <span>LEVEL: <b id="seq-level">1</b></span>
             </div>
+            <div id="seq-grid" class="memory-grid-v"></div>
+            <button id="seq-start" class="game-btn">START</button>
         </div>
     </div>
+
+    <div id="aim-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>AIM TRAINER</h2>
+            <div class="benchmark-stats">
+                <span>TARGETS: <b id="aim-count">0</b>/30</span>
+                <span>TIME: <b id="aim-time">0.00</b>s</span>
+            </div>
+            <div id="aim-area" class="aim-area"></div>
+            <button id="aim-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="verbal-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>VERBAL MEMORY</h2>
+            <div class="benchmark-stats">
+                <span>SCORE: <b id="verbal-score">0</b></span>
+                <span>LIVES: <b id="verbal-lives">3</b></span>
+            </div>
+            <div id="verbal-word">READY?</div>
+            <div class="benchmark-stats">
+                <button id="verbal-seen" class="game-btn" disabled>SEEN</button>
+                <button id="verbal-new" class="game-btn" disabled>NEW</button>
+            </div>
+            <button id="verbal-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="visual-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>VISUAL MEMORY</h2>
+            <div class="benchmark-stats">
+                <span>LEVEL: <b id="visual-level">1</b></span>
+            </div>
+            <div id="visual-grid" class="memory-grid-v"></div>
+            <button id="visual-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="number-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>NUMBER MEMORY</h2>
+            <div class="benchmark-stats">
+                <span>LEVEL: <b id="number-level">1</b></span>
+            </div>
+            <div id="number-display"></div>
+            <input type="text" id="number-input" class="game-input-large" placeholder="?" style="display:none;">
+            <button id="number-submit" class="game-btn" style="display:none;">SUBMIT</button>
+            <button id="number-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="chimp-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>CHIMP TEST</h2>
+            <div class="benchmark-stats">
+                <span>LEVEL: <b id="chimp-count">4</b></span>
+            </div>
+            <div id="chimp-grid" class="memory-grid-v"></div>
+            <button id="chimp-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="math-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>MENTAL MATH</h2>
+            <div class="benchmark-stats">
+                <span>SCORE: <b id="math-score">0</b></span>
+                <span>TIME: <b id="math-time">60</b>s</span>
+            </div>
+            <div id="math-problem" style="font-size: clamp(32px, 8vw, 48px); font-weight: 800; margin: 20px 0;">?</div>
+            <input type="number" id="math-input" class="game-input-large" placeholder="?" disabled>
+            <button id="math-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="stroop-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>STROOP TEST</h2>
+            <div class="benchmark-stats">
+                <span>SCORE: <b id="stroop-score">0</b></span>
+                <span>TIME: <b id="stroop-time">30</b>s</span>
+            </div>
+            <div id="stroop-word" style="font-size: clamp(32px, 8vw, 48px); font-weight: 900; margin: 20px 0;">COLOR</div>
+            <div id="stroop-buttons" class="benchmark-stats">
+                <button class="game-btn" data-color="red" disabled>RED</button>
+                <button class="game-btn" data-color="green" disabled>GREEN</button>
+                <button class="game-btn" data-color="blue" disabled>BLUE</button>
+                <button class="game-btn" data-color="yellow" disabled>YELLOW</button>
+            </div>
+            <button id="stroop-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="grid-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>GRID 1-20</h2>
+            <div class="benchmark-stats">
+                <span>NEXT: <b id="grid-next">1</b></span>
+                <span>TIME: <b id="grid-time">0.0</b>s</span>
+            </div>
+            <div id="grid-box" class="memory-grid-v"></div>
+            <button id="grid-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="color-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>COLOR FINDER</h2>
+            <div class="benchmark-stats">
+                <span>SCORE: <b id="color-score">0</b></span>
+                <span>TIME: <b id="color-time">15</b>s</span>
+            </div>
+            <div id="color-grid" class="color-grid"></div>
+            <button id="color-start" class="game-btn">START</button>
+        </div>
+    </div>
+
+    <div id="flip-overlay" class="game-overlay">
+        <div class="window-body benchmark-body">
+            <button class="close-game-btn"><i class="fas fa-times"></i> EXIT</button>
+            <h2>MEMORY FLIP</h2>
+            <div class="benchmark-stats">
+                <span>MOVES: <b id="flip-moves">0</b></span>
+            </div>
+            <div id="flip-grid" class="memory-grid-v"></div>
+            <button id="flip-start" class="game-btn">START</button>
+        </div>
+    </div>
+
 
     <script src="games.js"></script>
     <script src="script.js"></script>

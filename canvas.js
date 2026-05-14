@@ -1,114 +1,155 @@
 const canvas = document.getElementById('galaxyCanvas');
 const ctx = canvas.getContext('2d');
 
-// Pixelation Factor: Higher = more pixelated
-const PIXEL_SCALE = 4;
-
 let width, height;
-let stars = [];
-const numStars = 800; // Total stars
-const arms = 3; // Spiral arms
-const armSpread = 0.5; // How spread out the arms are
+let particles = [];
+let planets = [];
+let mouse = { x: null, y: null };
 
-function resize() {
-    // Set internal resolution lower than screen size
-    width = Math.ceil(window.innerWidth / PIXEL_SCALE);
-    height = Math.ceil(window.innerHeight / PIXEL_SCALE);
+const PARTICLE_COUNT = 120;
+const PLANET_COUNT = 4;
+const CONNECTION_DIST = 140;
+const MOUSE_RADIUS = 150;
 
-    canvas.width = width;
-    canvas.height = height;
-
-    // Scale up via CSS is handled, but we draw on small canvas
-    initStars();
-}
-
-window.addEventListener('resize', resize);
-
-class Star {
+class Particle {
     constructor() {
         this.reset();
     }
 
     reset() {
-        // Random distance from center
-        this.dist = Math.random() * (Math.min(width, height) / 1.5);
-
-        // Random angle offset based on distance to create spiral
-        // Angle = distance * spiral_factor + arm_offset + random_spread
-        const armIndex = Math.floor(Math.random() * arms);
-        const armAngle = (Math.PI * 2 * armIndex) / arms;
-        const spiralAngle = this.dist * 0.05; // Tightness of spiral
-        const randomOffset = (Math.random() - 0.5) * armSpread;
-
-        this.angle = armAngle + spiralAngle + randomOffset;
-
-        // Convert polar to cartesian
-        this.x = width / 2 + Math.cos(this.angle) * this.dist;
-        this.y = height / 2 + Math.sin(this.angle) * this.dist;
-
-        // Properties
-        this.size = Math.random() < 0.9 ? 1 : 2; // Mostly 1px (which becomes 4px on screen)
-        this.speed = (this.dist / 200) * 0.02 + 0.005; // Outer stars move faster angularly? Or slower? Let's rotate whole galaxy.
-
-        // Color: Monochrome + Red Accents
-        const rand = Math.random();
-        if (rand > 0.95) {
-            this.color = '#ff0000'; // Red accent
-        } else if (rand > 0.7) {
-            this.color = '#888888'; // Grey
-        } else {
-            this.color = '#ffffff'; // White
-        }
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.twinkleSpeed = 0.01 + Math.random() * 0.05;
+        this.twinklePhase = Math.random() * Math.PI * 2;
     }
 
     update() {
-        // Rotate around center
-        const dx = this.x - width / 2;
-        const dy = this.y - height / 2;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        let angle = Math.atan2(dy, dx);
+        this.x += this.vx;
+        this.y += this.vy;
+        this.twinklePhase += this.twinkleSpeed;
 
-        // Rotation speed
-        angle += 0.002;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        this.x = width / 2 + Math.cos(angle) * dist;
-        this.y = height / 2 + Math.sin(angle) * dist;
-
-        // Check bounds? Not really needed for rotation, they stay in circle
+        if (mouse.x !== null) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < MOUSE_RADIUS) {
+                let force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+                this.x -= dx * force * 0.03;
+                this.y -= dy * force * 0.03;
+            }
+        }
     }
 
     draw() {
-        ctx.fillStyle = this.color;
-        // Draw integer coordinates for crisp pixel look
-        ctx.fillRect(Math.floor(this.x), Math.floor(this.y), this.size, this.size);
+        const opacity = 0.3 + Math.abs(Math.sin(this.twinklePhase)) * 0.7;
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
     }
 }
 
-function initStars() {
-    stars = [];
-    for (let i = 0; i < numStars; i++) {
-        stars.push(new Star());
+class Planet {
+    constructor() {
+        this.reset();
     }
+
+    reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = Math.random() * 40 + 20;
+        this.vx = (Math.random() - 0.5) * 0.1;
+        this.vy = (Math.random() - 0.5) * 0.1;
+        this.color = `hsla(0, 0%, ${Math.random() * 20 + 5}%, 0.5)`; // Dark gray
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < -this.radius * 2) this.x = width + this.radius;
+        if (this.x > width + this.radius * 2) this.x = -this.radius;
+        if (this.y < -this.radius * 2) this.y = height + this.radius;
+        if (this.y > height + this.radius * 2) this.y = -this.radius;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        const grad = ctx.createRadialGradient(this.x - this.radius/3, this.y - this.radius/3, 0, this.x, this.y, this.radius);
+        grad.addColorStop(0, 'rgba(60, 60, 60, 0.4)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0.8)');
+        ctx.fillStyle = grad;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(255,255,255,0.05)';
+        ctx.fill();
+        
+        // Subtle ring
+        if (Math.random() > 0.7) {
+           ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+           ctx.lineWidth = 1;
+           ctx.beginPath();
+           ctx.ellipse(this.x, this.y, this.radius * 1.8, this.radius * 0.4, Math.PI/4, 0, Math.PI * 2);
+           ctx.stroke();
+        }
+        ctx.restore();
+    }
+}
+
+function init() {
+    particles = [];
+    planets = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+    for (let i = 0; i < PLANET_COUNT; i++) planets.push(new Planet());
+}
+
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    init();
 }
 
 function animate() {
-    // Trail effect? Or clear?
-    // Let's clear with slight opacity for trails? No, crisp pixels wanted.
-    // Clear background
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, width, height);
 
-    stars.forEach(star => {
-        star.update();
-        star.draw();
-    });
+    planets.forEach(p => { p.update(); p.draw(); });
+
+    for (let i = 0; i < particles.length; i++) {
+        let p1 = particles[i];
+        p1.update();
+        p1.draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p1.x - p2.x;
+            let dy = p1.y - p2.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < CONNECTION_DIST) {
+                let opacity = (1 - (dist / CONNECTION_DIST)) * 0.15;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+            }
+        }
+    }
 
     requestAnimationFrame(animate);
 }
 
-// Init
-window.addEventListener('load', () => {
-    resize();
-    animate();
-});
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 window.addEventListener('resize', resize);
+window.addEventListener('load', () => { resize(); animate(); });
