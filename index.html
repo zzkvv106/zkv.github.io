@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zkv106 — Mateusz Rybicki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="crt">
+        <div class="scanlines"></div>
+        <canvas id="retro-bg"></canvas>
+
+        <main>
+            <section class="hero">
+                <div class="pfp-wrapper">
+                    <img src="mclovin.jpg" alt="Mateusz Rybicki" class="pfp">
+                    <div class="pfp-ring"></div>
+                    <div class="pfp-pulse"></div>
+                </div>
+                <h1 class="glitch" data-text="zkv106">zkv106</h1>
+                <p class="subtitle">Mateusz Rybicki</p>
+                <div class="tagline">
+                    <span class="cursor-blink">&gt;</span> <span id="typed-text"></span><span class="typed-cursor">_</span>
+                </div>
+            </section>
+
+            <section class="skills-section">
+                <h2 class="section-title"><span class="accent">#</span> skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card" data-category="code">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <h3>Web Dev</h3>
+                        <div class="skill-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="85"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="code">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+                        <h3>Python</h3>
+                        <div class="skill-tags"><span class="tag">Scripting</span><span class="tag">Automation</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="80"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="code">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+                        <h3>Java</h3>
+                        <div class="skill-tags"><span class="tag">OOP</span><span class="tag">Backend</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="70"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="code">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline></svg></div>
+                        <h3>C++</h3>
+                        <div class="skill-tags"><span class="tag">Low-level</span><span class="tag">Performance</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="65"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="code">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"></path></svg></div>
+                        <h3>C#</h3>
+                        <div class="skill-tags"><span class="tag">.NET</span><span class="tag">Apps</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="60"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="sys">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
+                        <h3>Komputery</h3>
+                        <div class="skill-tags"><span class="tag">Hardware</span><span class="tag">Networking</span><span class="tag">Składanie</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="90"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="sys">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"></path></svg></div>
+                        <h3>Linux</h3>
+                        <div class="skill-tags"><span class="tag">Terminal</span><span class="tag">Sysadmin</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="75"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="art">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg></div>
+                        <h3>Adobe</h3>
+                        <div class="skill-tags"><span class="tag">Photoshop</span><span class="tag">Illustrator</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="70"></div></div>
+                    </div>
+                    <div class="skill-card" data-category="art">
+                        <div class="card-glow"></div>
+                        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></div>
+                        <h3>DaVinci Resolve</h3>
+                        <div class="skill-tags"><span class="tag">Video Editing</span><span class="tag">Color Grading</span></div>
+                        <div class="skill-level"><div class="level-bar" data-level="65"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-line"></div>
+                <p>&copy; 2026 zkv106 <span class="accent">•</span> all rights reserved</p>
+            </footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
